@@ -34,7 +34,7 @@ eksctl create cluster \
   --without-nodegroup
 
 ```
-## Associate IAM OIDC provider:
+ Associate IAM OIDC provider:
 ```bash
 eksctl utils associate-iam-oidc-provider \
   --region us-east-1 \
@@ -42,7 +42,7 @@ eksctl utils associate-iam-oidc-provider \
   --approve
 
 ```
-## Create managed node group:
+ Create managed node group:
 ```bash
 eksctl create nodegroup \
   --cluster=observability \
@@ -61,7 +61,7 @@ eksctl create nodegroup \
   --node-private-networking
 
 ```
-## Update your kubeconfig:
+ Update your kubeconfig:
 ```bash
 aws eks update-kubeconfig --name observability
 ```
@@ -76,11 +76,11 @@ eksctl create iamserviceaccount \
   --attach-policy-arn arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy \
   --approve
 ```
-## Retrieve the IAM Role ARN:
+ Retrieve the IAM Role ARN:
 ```bash
 ARN=$(aws iam get-role --role-name AmazonEKS_EBS_CSI_DriverRole --query 'Role.Arn' --output text)
 ```
-## Deploy EBS CSI Driver:
+ Deploy EBS CSI Driver:
 ```bash
 eksctl create addon \
   --cluster observability \
@@ -94,11 +94,11 @@ eksctl create addon \
 kubectl create namespace logging
 ```
 ## Step 4: Install Elasticsearch
-## Add Elastic Helm repo:
+ Add Elastic Helm repo:
 ```bash
 helm repo add elastic https://helm.elastic.co
 ```
-## Install Elasticsearch:
+ Install Elasticsearch:
 ```bash
 helm install elasticsearch elastic/elasticsearch \
   --namespace logging \
